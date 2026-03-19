@@ -1,5 +1,5 @@
 import pygame
-import fase1  # Importação interna para desacoplar a Main
+import fases.fase1 as fase1  # Importação interna para desacoplar a Main
 # Se houver mais fases, importe aqui: import fase2, fase3...
 
 # Definições de cores e constantes conforme as fontes [3]

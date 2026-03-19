@@ -1,7 +1,7 @@
 import pygame
 import sys
 from menu import Menu
-from jogo import Jogo
+from mecanicas.jogo import Jogo
 
 def main():
     # Inicialização conforme fontes [1]
