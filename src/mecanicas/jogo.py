@@ -1,4 +1,5 @@
 import pygame
+import fases.fase2 as f2
 import fases.fase1 as fase1  # Importação interna para desacoplar a Main
 # Se houver mais fases, importe aqui: import fase2, fase3...
 
@@ -84,8 +85,10 @@ class Jogo:
         if self.nivel_atual == 1:
             # Chama a função de geração de blocos do arquivo fase1.py
             return fase1.gerar_fase(Bloco) 
-        # Exemplo para próximas fases:
-        # elif self.nivel_atual == 2: return fase2.gerar_fase(Bloco)
+        
+        elif self.nivel_atual == 2:
+            return f2.gerar_fase(Bloco)
+        
         return []
 
     def atualizar(self):
@@ -97,8 +100,26 @@ class Jogo:
             self.game_over = True
         
         if len(self.blocos) == 0:
-            # Lógica para avançar de nível ou vencer
-            self.vitoria = True
+            self.nivel_atual += 1
+            self.blocos = self.carregar_fase(Bloco)
+            
+            # Reset da posição da bola para a nova fase
+            self.bola = Bola(self.largura_tela, self.altura_tela)
+            
+                
+    def proximo_nivel(self):
+        """Prepara o estado para a próxima fase"""
+        self.nivel_atual += 1
+        self.blocos = self.carregar_fase()
+        
+        # Reset de posição da bola e raquete para o centro [1]
+        self.bola = Bola(self.largura_tela, self.altura_tela)
+        self.raquete = Raquete(self.largura_tela, self.altura_tela)
+        
+        # Se não houver mais blocos, o jogador venceu o jogo todo
+        if not self.blocos:
+            print("Parabéns! Você concluiu todos os níveis.")
+            self.game_over = True 
 
     def desenhar(self, tela):
         tela.fill(PRETO)
