@@ -109,7 +109,7 @@ class Jogo:
         
         if len(self.blocos) == 0:
             self.nivel_atual += 1
-            self.blocos = self.carregar_fase(Bloco)
+            self.blocos = self.carregar_fase()
             
             # Reset da posição da bola para a nova fase
             self.bola = Bola(self.largura_tela, self.altura_tela)
