@@ -54,6 +54,14 @@ class Bola:
         if self.rect.colliderect(raquete_rect):
             self.dy *= -1
             self.rect.bottom = raquete_rect.top
+            
+            # Ajuste da angulação baseado no ponto de impacto
+            centro_raquete = raquete_rect.centerx
+            centro_bola = self.rect.centerx
+            diferenca = centro_bola - centro_raquete
+            
+            # Altera a velocidade em X proporcional à distância do centro
+            self.dx = diferenca * 0.1
 
         for bloco in blocos[:]:
             if self.rect.colliderect(bloco.rect):
